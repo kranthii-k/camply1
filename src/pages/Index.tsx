@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { Feed } from "@/components/Feed";
 import { Search } from "@/components/Search";
 import { Explore } from "@/components/Explore";
+import { Match } from "@/components/Match";
 import { Profile } from "@/components/Profile";
 import { CreatePost } from "@/components/CreatePost";
 import { useState } from "react";
@@ -25,8 +26,9 @@ const Index = () => {
       case "search":
         return <Search />;
       case "daily":
-      case "match":
         return <Explore />;
+      case "match":
+        return <Match />;
       case "profile":
         return <Profile />;
       default:

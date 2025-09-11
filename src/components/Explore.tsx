@@ -1,4 +1,4 @@
-import { HackathonMatch } from "@/components/HackathonMatch";
+
 import { DailyProblem } from "@/components/DailyProblem";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -50,14 +50,6 @@ export function Explore() {
           <DailyProblem />
         </div>
 
-        {/* Hackathon Matching */}
-        <div>
-          <div className="flex items-center gap-2 mb-4">
-            <Zap className="h-5 w-5 text-accent" />
-            <h2 className="text-lg font-semibold text-foreground">Find Teammates</h2>
-          </div>
-          <HackathonMatch />
-        </div>
 
         {/* Upcoming Hackathons */}
         <div>
