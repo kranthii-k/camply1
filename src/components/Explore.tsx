@@ -1,9 +1,12 @@
 
 import { DailyProblem } from "@/components/DailyProblem";
+import { CreateTeamDialog } from "@/components/CreateTeamDialog";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Users, Trophy, Zap } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 const upcomingHackathons = [
   {
@@ -33,6 +36,20 @@ const upcomingHackathons = [
 ];
 
 export function Explore() {
+  const { toast } = useToast();
+  const [createTeamOpen, setCreateTeamOpen] = useState(false);
+
+  const handleQuickAction = (action: string) => {
+    if (action === "Create Team") {
+      setCreateTeamOpen(true);
+    } else {
+      toast({
+        title: action,
+        description: `${action} feature coming soon...`,
+      });
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -113,25 +130,46 @@ export function Explore() {
         <Card className="p-6 bg-gradient-card">
           <h3 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h3>
           <div className="grid grid-cols-2 gap-4">
-            <Button variant="outline" className="h-16 flex-col gap-2">
+            <Button 
+              variant="outline" 
+              className="h-16 flex-col gap-2"
+              onClick={() => handleQuickAction("Create Team")}
+            >
               <Users className="h-6 w-6" />
               <span className="text-sm">Create Team</span>
             </Button>
-            <Button variant="outline" className="h-16 flex-col gap-2">
+            <Button 
+              variant="outline" 
+              className="h-16 flex-col gap-2"
+              onClick={() => handleQuickAction("Host Event")}
+            >
               <Calendar className="h-6 w-6" />
               <span className="text-sm">Host Event</span>
             </Button>
-            <Button variant="outline" className="h-16 flex-col gap-2">
+            <Button 
+              variant="outline" 
+              className="h-16 flex-col gap-2"
+              onClick={() => handleQuickAction("Submit Project")}
+            >
               <Trophy className="h-6 w-6" />
               <span className="text-sm">Submit Project</span>
             </Button>
-            <Button variant="outline" className="h-16 flex-col gap-2">
+            <Button 
+              variant="outline" 
+              className="h-16 flex-col gap-2"
+              onClick={() => handleQuickAction("Find Mentor")}
+            >
               <Zap className="h-6 w-6" />
               <span className="text-sm">Find Mentor</span>
             </Button>
           </div>
         </Card>
       </div>
+
+      <CreateTeamDialog 
+        open={createTeamOpen} 
+        onOpenChange={setCreateTeamOpen} 
+      />
     </div>
   );
 }
