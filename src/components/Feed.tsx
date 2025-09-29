@@ -194,7 +194,7 @@ export function Feed() {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between sticky top-0 bg-background/95 backdrop-blur p-4 border-b md:border-none">
-        <h1 className="text-xl font-bold text-foreground md:hidden">StudNet</h1>
+        <h1 className="text-xl font-bold text-foreground md:hidden">Camply</h1>
         <div className="flex items-center gap-2 ml-auto">
           <Button 
             variant="ghost" 

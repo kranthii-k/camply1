@@ -146,7 +146,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-2xl max-h-[90vh] overflow-hidden animate-scale-in">
+        <DialogContent className="max-w-2xl max-h-[90vh] flex flex-col animate-scale-in">
           <DialogHeader className="space-y-4 pb-4">
             <DialogTitle className="text-2xl font-bold bg-gradient-hero bg-clip-text text-transparent">
               Create Your Dream Team
@@ -181,7 +181,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
             </div>
           </DialogHeader>
 
-          <div className="overflow-y-auto flex-1 space-y-6">
+          <div className="overflow-y-auto flex-1 space-y-6 min-h-0">
             {/* Step 1: Basic Info */}
             {currentStep === 'basic' && (
               <div className="space-y-6 animate-fade-in">
@@ -234,7 +234,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
                   <p className="text-muted-foreground">Add up to 4 members to your team</p>
                 </div>
 
-                <div className="grid gap-4 max-h-96 overflow-y-auto">
+                <div className="grid gap-4 max-h-80 overflow-y-auto pr-2">
                   {members.map((member, index) => (
                     <Card key={index} className={`p-4 border-2 transition-all duration-300 hover:shadow-soft ${
                       member.filled ? 'bg-accent/10 border-accent' : 'hover:border-primary/50'
