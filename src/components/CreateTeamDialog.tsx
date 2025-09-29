@@ -234,7 +234,7 @@ export function CreateTeamDialog({ open, onOpenChange }: CreateTeamDialogProps) 
                   <p className="text-muted-foreground">Add up to 4 members to your team</p>
                 </div>
 
-                <div className="grid gap-4">
+                <div className="grid gap-4 max-h-96 overflow-y-auto">
                   {members.map((member, index) => (
                     <Card key={index} className={`p-4 border-2 transition-all duration-300 hover:shadow-soft ${
                       member.filled ? 'bg-accent/10 border-accent' : 'hover:border-primary/50'

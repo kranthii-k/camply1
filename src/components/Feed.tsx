@@ -14,7 +14,12 @@ const mockPosts = [
     upvotes: 23,
     downvotes: 2,
     comments: 8,
-    category: "query" as const
+    category: "query" as const,
+    mockComments: [
+      "I struggled with the same thing! Try the Auth0 documentation, it has great examples for React. The key is understanding the authorization code flow and how to handle the callback properly.",
+      "OAuth can be tricky at first. I recommend starting with a library like react-oauth2-pkce-client instead of implementing from scratch. It handles all the security aspects for you.",
+      "Check out this amazing blog post by Auth0 about OAuth 2.0 with React. It covers the entire flow with code examples: auth0.com/blog/complete-guide-to-react-user-authentication"
+    ]
   },
   {
     id: "2", 
@@ -25,7 +30,12 @@ const mockPosts = [
     upvotes: 156,
     downvotes: 4,
     comments: 34,
-    category: "solution" as const
+    category: "solution" as const,
+    mockComments: [
+      "This is gold! I've been struggling with microservices design patterns. The API Gateway pattern you mentioned is exactly what our team needs. Could you share more about how you implemented service discovery?",
+      "Fantastic breakdown! The circuit breaker pattern saved our production system during high traffic. Hystrix is great for this, but have you tried resilience4j? It's more modern and has better Spring Boot integration.",
+      "As someone who just started learning about distributed systems, this is incredibly helpful. The monitoring aspect you mentioned - are you using Prometheus + Grafana stack? Any specific metrics you recommend tracking?"
+    ]
   },
   {
     id: "3",
@@ -36,7 +46,11 @@ const mockPosts = [
     upvotes: 45,
     downvotes: 1,
     comments: 12,
-    category: "job" as const
+    category: "job" as const,
+    mockComments: [
+      "I can help with Google referral! I'm a current SWE there. Your projects sound impressive. DM me your resume and I'll take a look. The hiring process is quite competitive but your background looks strong.",
+      "Meta referrals are available through their career portal now. However, having an internal referral definitely helps. Make sure your resume highlights the distributed systems aspect of your chat app - that's very relevant to Meta's infrastructure."
+    ]
   },
   {
     id: "4",
@@ -47,7 +61,10 @@ const mockPosts = [
     upvotes: 89,
     downvotes: 3,
     comments: 18,
-    category: "solution" as const
+    category: "solution" as const,
+    mockComments: [
+      "This is amazing! I've been struggling with understanding backpropagation for weeks. Would love to see your implementation. Did you use any specific resources to understand the math behind it?"
+    ]
   },
   {
     id: "5",
@@ -58,7 +75,11 @@ const mockPosts = [
     upvotes: 234,
     downvotes: 8,
     comments: 67,
-    category: "discussion" as const
+    category: "discussion" as const,
+    mockComments: [
+      "Congratulations! The AI study planner sounds revolutionary. I have an MBA background and experience in ed-tech startups. Would love to discuss the business model and market potential.",
+      "Incredible project! As someone who struggles with personalized study plans, this could be a game-changer. What AI/ML techniques did you use for the adaptation algorithm?"
+    ]
   },
   {
     id: "6",
@@ -236,7 +257,7 @@ export function Feed() {
       {/* Posts */}
       <div className="space-y-4 px-4 pb-20 md:pb-4">
         {filteredPosts.map((post) => (
-          <PostCard key={post.id} {...post} />
+          <PostCard key={post.id} {...post} mockComments={post.mockComments} />
         ))}
       </div>
     </div>

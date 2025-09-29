@@ -17,6 +17,7 @@ interface PostCardProps {
   comments: number;
   category: "query" | "solution" | "job" | "discussion";
   className?: string;
+  mockComments?: string[];
 }
 
 const categoryColors = {
@@ -35,12 +36,14 @@ export function PostCard({
   downvotes, 
   comments, 
   category,
-  className 
+  className,
+  mockComments = []
 }: PostCardProps) {
   const [userVote, setUserVote] = useState<"up" | "down" | null>(null);
   const [currentUpvotes, setCurrentUpvotes] = useState(upvotes);
   const [currentDownvotes, setCurrentDownvotes] = useState(downvotes);
   const [currentComments, setCurrentComments] = useState(comments);
+  const [showComments, setShowComments] = useState(false);
   const { toast } = useToast();
 
   const handleVote = (type: "up" | "down") => {
@@ -129,12 +132,7 @@ export function PostCard({
               variant="ghost" 
               size="sm" 
               className="text-muted-foreground hover:text-foreground"
-              onClick={() => {
-                toast({
-                  title: "Comments",
-                  description: "Opening comments section...",
-                });
-              }}
+              onClick={() => setShowComments(!showComments)}
             >
               <MessageCircle className="h-4 w-4" />
               {currentComments} comments
@@ -155,6 +153,24 @@ export function PostCard({
               Share
             </Button>
           </div>
+
+          {/* Comments Section */}
+          {showComments && mockComments.length > 0 && (
+            <div className="mt-4 pt-4 border-t space-y-3">
+              {mockComments.map((comment, index) => (
+                <div key={index} className="bg-muted/30 rounded-lg p-3">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="w-6 h-6 bg-gradient-primary rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                      {comment.charAt(0).toUpperCase()}
+                    </div>
+                    <span className="text-sm font-medium">@anonymous_user_{index + 1}</span>
+                    <span className="text-xs text-muted-foreground">• {Math.floor(Math.random() * 12) + 1}h ago</span>
+                  </div>
+                  <p className="text-sm text-foreground leading-relaxed">{comment}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </Card>

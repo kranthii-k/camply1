@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
+import { PlacementDetailDialog } from "@/components/PlacementDetailDialog";
 import { Briefcase, Building, Users, Clock, ChevronRight, Star, MessageCircle, Share2 } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -133,6 +134,8 @@ export function Placements() {
   const { toast } = useToast();
   const [filter, setFilter] = useState<string>("all");
   const [upvotedPosts, setUpvotedPosts] = useState<Set<string>>(new Set());
+  const [selectedPlacement, setSelectedPlacement] = useState<PlacementData | null>(null);
+  const [showDetailDialog, setShowDetailDialog] = useState(false);
 
   const filteredPosts = placementPosts.filter(post => {
     if (filter === "all") return true;
@@ -174,11 +177,9 @@ export function Placements() {
     });
   };
 
-  const handleViewDetails = (company: string) => {
-    toast({
-      title: "Opening Details",
-      description: `Loading detailed ${company} placement information...`,
-    });
+  const handleViewDetails = (post: PlacementData) => {
+    setSelectedPlacement(post);
+    setShowDetailDialog(true);
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -334,7 +335,7 @@ export function Placements() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => handleViewDetails(post.company)}
+                    onClick={() => handleViewDetails(post)}
                     className="h-auto p-1 text-accent"
                   >
                     <span className="text-xs mr-1">View Details</span>
@@ -346,6 +347,12 @@ export function Placements() {
           ))}
         </div>
       </div>
+
+      <PlacementDetailDialog 
+        open={showDetailDialog}
+        onOpenChange={setShowDetailDialog}
+        placement={selectedPlacement}
+      />
     </div>
   );
 }
